@@ -1,8 +1,7 @@
 # Sample workflow to access AWS resources when workflow is tied to branch
 # The workflow Creates static website using aws s3
-name: AWS Stack Test
+name: AWS Stack Destroy
 on:
-  push:
   workflow_dispatch:
 env:
   # Setting an environment variable with the value of a configuration variable
@@ -32,14 +31,6 @@ jobs:
       - name:  Get STS Id test
         run: |
           aws sts get-caller-identity
-      - name: terraform apply
-        uses: dflook/terraform-apply@v1
-        with:
-          auto_approve: true
-          backend_config: |
-            bucket=${{ vars.TFSTATE_BUCKET }}
-            key=${{ vars.TFSTATE_KEY }}
-            region=${{ vars.TFSTATE_REGION }}
       - name: terraform destroy
         uses: dflook/terraform-destroy@v1
         with:
