@@ -60,7 +60,7 @@ resource "aws_cloudfront_function" "ip_returner" {
         headers: {
           "content-type": { value: "text/plain" }
         },
-        body: "Your IP address is: " + clientIP
+        body: clientIP
       };
       
       return response;
